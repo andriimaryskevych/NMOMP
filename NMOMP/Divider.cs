@@ -101,25 +101,27 @@ namespace NMOMP
                     }
                 }
             }
-            Console.WriteLine(counter);
-            for (int deltaZ = 0; deltaZ < 1; deltaZ++)
-            {
-                for (int deltaY = 0; deltaY < n * 2 + 1; deltaY++)
-                {
-                    for (int deltaX = 0; deltaX < m * 2 + 1; deltaX++)
-                    {
-                        if (matrix[deltaX, deltaY, deltaZ] != null)
-                        {
-                            Console.Write(String.Format("{0,15}", matrix[deltaX, deltaY, deltaZ]));
-                        }
-                        else
-                        {
-                            Console.Write("{0,15}", " ");
-                        }
-                    }
-                    Console.WriteLine();
-                }
-            }
+            //Console.WriteLine(counter);
+            //for (int deltaZ = 0; deltaZ < 1; deltaZ++)
+            //{
+            //    for (int deltaY = 0; deltaY < n * 2 + 1; deltaY++)
+            //    {
+            //        for (int deltaX = 0; deltaX < m * 2 + 1; deltaX++)
+            //        {
+            //            if (matrix[deltaX, deltaY, deltaZ] != null)
+            //            {
+            //                Console.Write(String.Format("{0,15}", matrix[deltaX, deltaY, deltaZ]));
+            //            }
+            //            else
+            //            {
+            //                Console.Write("{0,15}", " ");
+            //            }
+            //        }
+            //        Console.WriteLine();
+            //    }
+            //}
         }
+
+
     }
 }
