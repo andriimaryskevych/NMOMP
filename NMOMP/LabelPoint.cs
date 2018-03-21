@@ -13,7 +13,9 @@ namespace NMOMP
         public double y;
         public double z;
 
-        public int number;
+        public int global;
+        public int local;
+        public int belongElementNumber;
 
         public LabelPoint(double _x, double _y, double _z)
         {
