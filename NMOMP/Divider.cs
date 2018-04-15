@@ -227,7 +227,7 @@ namespace NMOMP
         //        matrix[0,0,2].local = 5;
         //        matrix[2,0,2].local = 6;
         //        matrix[2,2,2].local = 7;
-        //        matrix[0, 2, 2].local = 8;
+        //        matrix[0,2,2].local = 8;
                         
         //        matrix[1,0,0].local = 9;
         //        matrix[2,1,0].local = 10;
@@ -237,7 +237,7 @@ namespace NMOMP
         //        matrix[0,0,1].local = 13;
         //        matrix[2,0,1].local = 14;
         //        matrix[2,2,1].local = 15;
-        //        matrix[0, 2, 1].local = 16;
+        //        matrix[0,2,1].local = 16;
                          
         //        matrix[1,0,2].local = 17;
         //        matrix[2,1,2].local = 18;
