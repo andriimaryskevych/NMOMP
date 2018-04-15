@@ -14,32 +14,7 @@ namespace NMOMP
         // Than I take this point and paste it to ALPHA_BETA_GAMMA_VALUE
         // ALPHA_BETA_GAMMA_VALUE[0][0][0] will evaluate to -1, 1, -1
         // these are needed coordinates for PHIi function where alpaha_i is -1 and so on))
-        public static Dictionary<int, _3DPoint> magicDictionary = new Dictionary<int, _3DPoint> {
-            {1, new _3DPoint(0,0,0) },
-            {2, new _3DPoint(2,0,0) },
-            {3, new _3DPoint(2,2,0) },
-            {4, new _3DPoint(0,2,0) },
-
-            {5, new _3DPoint(0,0,2) },
-            {6, new _3DPoint(2,0,2) },
-            {7, new _3DPoint(2,2,2) },
-            {8, new _3DPoint(0,2,2) },
-
-            {9,  new _3DPoint(1,0,0) },
-            {10, new _3DPoint(2,1,0) },
-            {11, new _3DPoint(1,2,0) },
-            {12, new _3DPoint(0,1,0) },
-
-            {13, new _3DPoint(0,0,1) },
-            {14, new _3DPoint(2,0,1) },
-            {15, new _3DPoint(2,2,1) },
-            {16, new _3DPoint(0,2,1) },
-
-            {17, new _3DPoint(1,0,2) },
-            {18, new _3DPoint(2,1,2) },
-            {19, new _3DPoint(1,2,2) },
-            {20, new _3DPoint(0,1,2) },
-        };
+        public static Dictionary<int, _3DPoint> magicDictionary = Globals.magicDictionary;
         public static _3DPoint[,,] ALPHA_BETA_GAMMA_VALUE = new SquareGenerator(-1, 0, 1).getMatrix();
 
         public static double ONE_EIGHT = (double)1 / 8;

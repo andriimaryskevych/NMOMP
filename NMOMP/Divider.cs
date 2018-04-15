@@ -9,8 +9,11 @@ namespace NMOMP
 {
     class Divider
     {
+        // this one holds all the points
+        // when i devide a kube in 2x2x2 parts it's size beacames 5x5x5
         public LabelPoint[,,] matrix;
-        public List<LabelPoint[,,]> finiteElement;
+        // in case above, lists Count is equal 8
+        public List<FiniteElement> finiteElement;
 
         public int x;
         public int y;
@@ -24,6 +27,10 @@ namespace NMOMP
         private double SCALE_Y;
         private double SCALE_Z;
 
+
+        // After constructor executing I will have whole figure dividet into finite elements and strored into list of finite elements
+        // Each such list item is represented as a 3-dimensional matrix of LabelPoints, it's some kind of point structure but with additional important propperties like:
+        // lacal: it's local nnumber; global: global number in matrix()
         public Divider(int _x, int _y, int _z, int _m, int _n, int _k) {
             x = _x;
             y = _y;
@@ -38,16 +45,16 @@ namespace NMOMP
             SCALE_Z = (double)z / k;
 
             matrix = new LabelPoint[m * 2 + 1, n * 2 + 1, k * 2 + 1];
-            finiteElement = new List<LabelPoint[,,]>();
+            finiteElement = new List<FiniteElement>();
             
 
             fillMatrixWithMainVertexes();
             fillMatrixWithIntermidiateVertexes();
             setGlobalNumeration();
             divideInFiniteElements();
-
-            //setLocalNumeration();
-            //LabelPoint[,,] test = finiteElement[7]
+            setLocalNumeration();
+            
+            //LabelPoint[,,] test = finiteElement[7];
             //for (int deltaY = 2; deltaY >= 0; deltaY--)
             //{
             //    for (int deltaX = 0; deltaX < 3; deltaX++)
@@ -188,11 +195,6 @@ namespace NMOMP
                 int X_COORDINATE = current_element;
 
                 createIndependentElements(X_COORDINATE * 2, Y_COORDINATE * 2, Z_COOORDINATE * 2, figure);
-
-                //Console.WriteLine("{0} {1} {2}", X_COORDINATE * SCALE_X, Y_COORDINATE * SCALE_Y, Z_COOORDINATE * SCALE_Z);
-                //LabelPoint current_point = matrix[X_COORDINATE * 2, Y_COORDINATE * 2, Z_COOORDINATE * 2];
-                //Console.WriteLine(current_point);
-                //Console.WriteLine();
             }
         }
         private void createIndependentElements(int x, int y, int z, int belongElementNumber)
@@ -204,46 +206,33 @@ namespace NMOMP
                 {
                     for (int deltaX = 0; deltaX < 3; deltaX++)
                     {
-                        finite_element[deltaX, deltaY, deltaZ] = matrix[x + deltaX, y + deltaY, z + deltaZ];
-                        if (finite_element[deltaX, deltaY, deltaZ] != null)
+                        if (matrix[x + deltaX, y + deltaY, z + deltaZ] != null)
                         {
+                            finite_element[deltaX, deltaY, deltaZ] = new LabelPoint(matrix[x + deltaX, y + deltaY, z + deltaZ]);
                             finite_element[deltaX, deltaY, deltaZ].belongElementNumber = belongElementNumber;
+                        }
+                        else {
+                            finite_element[deltaX, deltaY, deltaZ] = null;
                         }
                     }
                 }
             }
-            finiteElement.Add(finite_element);
+            FiniteElement item = new FiniteElement(finite_element, belongElementNumber);
+            finiteElement.Add(item);
         }
 
-        //private void setLocalNumeration()
-        //{
-        //    foreach (LabelPoint[,,] matrix in finiteElement)
-        //    {
-        //        matrix[0,0,0].local = 1;
-        //        matrix[2,0,0].local = 2;
-        //        matrix[2,2,0].local = 3;
-        //        matrix[0,2,0].local = 4;
-                        
-        //        matrix[0,0,2].local = 5;
-        //        matrix[2,0,2].local = 6;
-        //        matrix[2,2,2].local = 7;
-        //        matrix[0,2,2].local = 8;
-                        
-        //        matrix[1,0,0].local = 9;
-        //        matrix[2,1,0].local = 10;
-        //        matrix[1,2,0].local = 11;
-        //        matrix[0,1,0].local = 12;
-                         
-        //        matrix[0,0,1].local = 13;
-        //        matrix[2,0,1].local = 14;
-        //        matrix[2,2,1].local = 15;
-        //        matrix[0,2,1].local = 16;
-                         
-        //        matrix[1,0,2].local = 17;
-        //        matrix[2,1,2].local = 18;
-        //        matrix[1,2,2].local = 19;
-        //        matrix[0,1,2].local = 20;
-        //    }
-        //}
+        private void setLocalNumeration()
+        {
+            Dictionary<int, _3DPoint> magicDictionary = Globals.magicDictionary;
+            _3DPoint p = null;
+            foreach (FiniteElement item in finiteElement)
+            {
+                for (int i = 1; i <= 20; i++)
+                {
+                    p = magicDictionary[i];
+                    item.matrix[(int)p.X, (int)p.Y, (int)p.Z].local = i;
+                }                
+            }
+        }
     }
 }

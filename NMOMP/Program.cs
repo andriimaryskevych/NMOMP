@@ -11,10 +11,13 @@ namespace NMOMP
     {
         static void Main(string[] args)
         {
-            //_3DPoint[,,] matrix = new SquareGenerator(-1 * Math.Sqrt(0.6), 0, Math.Sqrt(0.6)).getMatrix();
+            //_3DPoint[,,] matrix = new SquareGenerator(-1, 0, 1).getMatrix();
+            //Dictionary<int, _3DPoint> magicDictionary = Globals.magicDictionary;
 
+            //_3DPoint p = magicDictionary[3];
+            //Console.WriteLine(matrix[(int)p.X, (int)p.Y, (int)p.Z]);
 
-            //for(int i = 1; i <= 20; i++)
+            //for (int i = 1; i <= 20; i++)
             //{
             //    _3DPoint point = FI.magicDictionary[i];
             //    _3DPoint coord = FI.ALPHA_BETA_GAMMA_VALUE[(int)point.X, (int)point.Y, (int)point.Z];
@@ -25,22 +28,29 @@ namespace NMOMP
             //    Console.WriteLine();
             //}
 
-            double[,,] result = DFIABG.Generate();
+            //double[,,] result = DFIABG.Generate();
 
-            for (int i = 0; i < 20; i++)
+            //for (int i = 0; i < 27; i++)
+            //{
+            //    Console.WriteLine(result[i, 0, 0]);
+            //}
+
+            Divider a = new Divider(4, 4, 4, 4, 4, 4);
+            foreach (FiniteElement item in a.finiteElement)
             {
-                Console.WriteLine(result[15,2,i]);
+                double[,,] dxyzabg = DXYZABG.Generate(item.matrix);
+                item.DXYZABG = dxyzabg;
+                item.DJ = DJ.Generate(dxyzabg);
             }
 
+            //Divider a = new Divider(4, 4, 4, 4, 4, 4);
 
-            //_3DPoint point = FI.magicDictionary[1];
-            //Console.WriteLine($"{point.X} {point.Y} {point.Z}");
+            //double[,,] result = DXYZABG.Generate(a.finiteElement[1].matrix);
 
-            
-            //Console.WriteLine($"{coord.X} {coord.Y} {coord.Z}");
-
-            //Console.WriteLine(FI.get(1, coord.X, coord.Y, coord.Z));
-            //Divider a = new Divider(10, 10, 10, 2, 2, 2);
+            //for (int i = 0; i < 27; i++)
+            //{
+            //    Console.WriteLine(result[0, 0, i]);
+            //}
 
             ////Console.Write("{0,-5}", "data");
             ////Console.Write("Hello");
