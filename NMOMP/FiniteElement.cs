@@ -10,6 +10,7 @@ namespace NMOMP
     {
         public LabelPoint[,,] matrix;
         public double[,,] DXYZABG;
+        public double[] DJ;
         public int number;
 
         public FiniteElement(LabelPoint[,,] matrix, int number)

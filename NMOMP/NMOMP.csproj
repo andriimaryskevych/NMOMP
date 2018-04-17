@@ -48,6 +48,7 @@
     <Compile Include="3DPoint.cs" />
     <Compile Include="DFIABG.cs" />
     <Compile Include="Divider.cs" />
+    <Compile Include="DJ.cs" />
     <Compile Include="DXYZABG.cs" />
     <Compile Include="FI.cs" />
     <Compile Include="FiniteElement.cs" />

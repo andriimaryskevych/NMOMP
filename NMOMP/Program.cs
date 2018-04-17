@@ -35,22 +35,24 @@ namespace NMOMP
             //    Console.WriteLine(result[i, 0, 0]);
             //}
 
-            Divider a = new Divider(4, 4, 4, 4, 4, 4);
-            foreach (FiniteElement item in a.finiteElement)
-            {
-                double[,,] dxyzabg = DXYZABG.Generate(item.matrix);
-                item.DXYZABG = dxyzabg;
-                item.DJ = DJ.Generate(dxyzabg);
-            }
-
             //Divider a = new Divider(4, 4, 4, 4, 4, 4);
-
-            //double[,,] result = DXYZABG.Generate(a.finiteElement[1].matrix);
-
-            //for (int i = 0; i < 27; i++)
+            //foreach (FiniteElement item in a.finiteElement)
             //{
-            //    Console.WriteLine(result[0, 0, i]);
+            //    double[,,] dxyzabg = DXYZABG.Generate(item.matrix);
+            //    item.DXYZABG = dxyzabg;
+            //    item.DJ = DJ.Generate(dxyzabg);
             //}
+
+            Divider a = new Divider(4, 4, 4, 4, 4, 4);
+
+            double[,,] result = DXYZABG.Generate(a.finiteElement[0].matrix);
+
+            double[] dj = DJ.Generate(result);
+
+            for (int i = 0; i < 27; i++)
+            {
+                Console.WriteLine(dj[i]);
+            }
 
             ////Console.Write("{0,-5}", "data");
             ////Console.Write("Hello");
